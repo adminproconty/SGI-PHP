@@ -1,11 +1,7 @@
 <?php
-	session_start();
-	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
-        header("location: login.php");
-		exit;
-  }
-	
-	/* Connect To Database*/
+	include('ajax/is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
+
+    /* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
 	
@@ -131,28 +127,10 @@
                             <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" required>
                         </div>
                     </div>
-                    <div class="form-group" style="display: none;">
-                        <label for="referencia" class="col-sm-3 control-label">Referencia<span class="obligatorio">*</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="referencia" name="referencia" placeholder="Referencia">
-                        </div>
-                    </div>
-                    <div class="form-group" style="display: none;">
-                        <label for="sector" class="col-sm-3 control-label">Sector<span class="obligatorio">*</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="sector" id="sector" class="sector"></select>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="email" class="col-sm-3 control-label" style="text-align:left;">Email<span class="obligatorio">*</span></label>
                         <div class="col-sm-8">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono" class="col-sm-3 control-label" style="text-align:left;">Teléfono</label>
-                        <div class="col-sm-8">
-                            <input type="tel" class="form-control" id="telefono" maxlength="9" onkeypress="return validar(event)" name="telefono" placeholder="Teléfono">
                         </div>
                     </div>
                     <div class="form-group">
@@ -177,6 +155,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary" id="guardar">Guardar</button>
+                
             </div>
             </form>
         </div>
@@ -239,30 +218,14 @@
                             <input type="text" class="form-control" id="editDireccion" name="editDireccion" placeholder="Dirección" required>
                         </div>
                     </div>
-                    <div class="form-group" style="display: none;">
-                        <label for="editReferencia" class="col-sm-3 control-label">Referencia<span class="obligatorio">*</span></label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="editReferencia" name="editReferencia" placeholder="Referencia">
-                        </div>
-                    </div>
-                    <div class="form-group" style="display: none;">
-                        <label for="editSector" class="col-sm-3 control-label">Sector<span class="obligatorio">*</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="editSector" id="editSector"></select>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <label for="editEmail" class="col-sm-3 control-label" style="text-align:left;">Email<span class="obligatorio">*</span></label>
                         <div class="col-sm-8">
                             <input type="email" class="form-control" id="editEmail" name="editEmail" placeholder="Email" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="editTelefono" class="col-sm-3 control-label" style="text-align:left;">Teléfono</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="editTelefono" name="editTelefono" placeholder="Teléfono">
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <label for="editCelular" class="col-sm-3 control-label" style="text-align:left;">Celular</label>
                         <div class="col-sm-8">
@@ -312,5 +275,12 @@
 	?>
 	<script type="text/javascript" src="js/clientes.js"></script>
 	<link rel="stylesheet" href="css/cliente.css">
+    <!-- Para mensajes de Pantalla-->
+    <script type="text/javascript" src="js/lib/flash.min.js"></script>
+    <script type="text/javascript" src="js/lib/funciones.js"></script>
+    
   </body>
 </html>
+<?php
+
+?>
